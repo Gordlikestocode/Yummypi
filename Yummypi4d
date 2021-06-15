@@ -1,0 +1,76 @@
+#!/bin/bash
+
+
+#Install NextCloud
+echo "------------------------"
+echo "Installing NextCloud"
+echo "------------------------"
+
+docker pull nextcloud
+
+
+#Creating DataBase
+echo "Creating DataBase"
+docker pull postgres
+docker network create --driver bridge nextcloud-net
+docker run --name postgres -e POSTGRES_PASSWORD=123456 --network nextcloud-net -d postgres
+docker run --name nextcloud -d -p 8080:80 -v /home/pi/nextcloud:/var/www/html --network nextcloud-net nextcloud
+echo "-----------------------------"
+echo "NextCloud is Done Installing"
+echo "-----------------------------"
+echo "Important Info"
+echo "To access your Cloud type ur ip then at the end type :8080"
+echo "then create a username and passwd, then click database and select postgres and type"
+echo "type postgres for database user, type 123456 for database passwd, for the database name type postgres"
+echo "replace localhost with postgres"
+echo "-------------------------------------------------------------------------------------------------------"
+echo "Installing Portainer"
+echo "---------------------"
+docker volume create portainer_data 
+#This is to create a volume in docker for portainer
+docker run -d -p 8000:8000 -p 9000:9000 --name=portainer --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data portainer/portainer-ce
+echo "--------------------------------------------------------------------"
+echo "Portainer has finished installing!"
+echo "--------------------------------------------------------------------"
+echo "Important info"
+echo "to access portainer type your raspberry pi ip with :9000 at the end"
+echo "--------------------------------------------------------------------"
+echo "Installing HomeAssistant"
+echo "-------------------------"
+mkdir homeAssistant
+docker run --init -d \
+  --name homeassistant \
+  --restart=unless-stopped \
+  -v /etc/localtime:/etc/localtime:ro \
+  -v /home/pi/homeAssistant:/config \
+  --network=host \
+  homeassistant/raspberrypi4-homeassistant:stable
+echo "---------------------------------------"
+echo "HomeAssistant has finsished installing"
+echo "---------------------------------------"
+echo "Important info:"
+echo "to access your Assistant type your ip with :8123 at the end"
+echo "------------------------------------------------------------"
+echo "Installing Duplicati"
+echo "---------------------"
+#Duplicati is used for backing up your data to the cloud
+docker run \
+--name=duplicati \
+-d \
+-e PUID=1000 \
+-e PGID=1000 \
+-p 8200:8200 \
+-v /home/steve/docker:/docker \
+duplicati/duplicati
+echo "---------------------------"
+echo "Everything is now installed"
+echo "---------------------------"
+echo "To access your duplicati go to ur ip with :8200 at the end"
+echo "-----------------------------------------------------------"
+echo "Recap:"
+echo "nas, docker, nextcloud, portainer, Home Assistant and duplicati was installed."
+echo "ports were:
+echo ":8080, :9000, :8123, :8200"
+echo "Thanks to:
+echo "https://www.youtube.com/channel/UC1mLEdZ-n1gNWhjsAUzsrKQ, \n https://www.youtube.com/user/ksktech, \n  https://www.youtube.com/channel/UCXJ4jKAvMMg56WGhqrZHFgw, \n https://www.youtube.com/channel/UCy2b5p8-XccSOR_x5HGpiRA
+echo "https://www.youtube.com/channel/UCp5ShPYJvi2EA4hLUERa86w \n https://www.youtube.com/channel/UC7rrM5Jb8Ts8IZSvdVreU1g
