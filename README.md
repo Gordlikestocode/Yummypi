@@ -17,45 +17,45 @@ This is a bash script that automaticly installs and setup the Samba Protocal, Ne
 ### Installing
 
 * First you need to install git
-'''
+```
 
 sudo apt-get install git -y
-'''
+```
 
 * Now you need to clone the project 
-'''
+```
 
 git clone https://github.com/Gordlikestocode/Yummypi.git
-'''
+```
 
 * Now Run Yummypi.sh
-'''
+```
 
 sudo ./Yummypi.sh
-'''
+```
 
 *Now just imput information when prompted
 Once its done restart the pi 
-'''
+```
 
 sudo reboot now
-'''
+```
 
 * Now its time to install Docker and its containers
 * If you are on a raspberry pi 3 type the command below
-'''
+```
 sudo ./Yummypi3d
-'''
+```
 * If you are on a pi 4 type
-'''
+```
 
 sudo ./Yummypi4d
-'''
+```
 *Not sure what version? type the command below to find your version
-'''
+```
 
 cat /proc/cpuinfo | grep Model
-'''
+```
 ## Now let it install meanwhile connect to your new nas
 
 ### Windows
