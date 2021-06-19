@@ -1,10 +1,7 @@
 #!/bin/bash
 
 #CHANGE YOUR PASSWD
-echo "---------------------------"
-echo "Please change Your Password"
-echo "---------------------------"
-passwd
+
 
 
 # Install Packages for NAS
