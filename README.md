@@ -27,11 +27,16 @@ sudo apt-get install git -y
 
 git clone https://github.com/Gordlikestocode/Yummypi.git
 ```
+* Now you need to move into the directory
+```
+
+cd Yummypi
+```
 
 * Now Run Yummypi.sh
 ```
 
-sudo ./Yummypi.sh
+sudo bash Yummypi.sh
 ```
 
 * When a splash screen ask for DCHP navigate and click yes
@@ -45,12 +50,12 @@ sudo reboot now
 * Now its time to install Docker and its containers
 * If you are on a raspberry pi 3 type the command below
 ```
-sudo ./Yummypi3d
+sudo bash Yummypi3d
 ```
 * If you are on a pi 4 type
 ```
 
-sudo ./Yummypi4d
+sudo bash Yummypi4d
 ```
 * Not sure what version? type the command below to find your version
 ```
